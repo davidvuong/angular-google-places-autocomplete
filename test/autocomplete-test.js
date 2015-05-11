@@ -1,13 +1,11 @@
 /*
  * angular-google-places-autocomplete
  *
- * Copyright (c) 2014 "kuhnza" David Kuhn
+ * Copyright (c) 2015 David Vuong
  * Licensed under the MIT license.
- * https://github.com/kuhnza/angular-google-places-autocomplete/blob/master/LICENSE
+ * https://github.com/davidvuong/angular-google-places-autocomplete/blob/master/LICENSE
  */
-
 'use strict';
-
 
 // Sample set of AutocompleteService predictions
 var PREDICTIONS = [

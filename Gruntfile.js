@@ -1,32 +1,28 @@
 /*
  * angular-google-places-autocomplete
  *
- * Copyright (c) 2014 "kuhnza" David Kuhn
+ * Copyright (c) 2015 David Vuong
  * Licensed under the MIT license.
- * https://github.com/kuhnza/angular-google-places-autocomplete/blob/master/LICENSE
+ * https://github.com/davidvuong/angular-google-places-autocomplete/blob/master/LICENSE
  */
-
 'use strict';
 
 module.exports = function (grunt) {
-	// Load grunt tasks automatically
-	require('load-grunt-tasks')(grunt);
+    // Load grunt tasks automatically
+    require('load-grunt-tasks')(grunt);
 
-	grunt.initConfig({
-		karma: {
-			unit: {
-				configFile: 'karma.conf.js',
-				singleRun: true
-			}
-		},
-		clean: {
-			dist: { src: 'dist', dot: true },
+    grunt.initConfig({
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                singleRun: true
+            }
+        },
+        clean: {
+            dist: { src: 'dist', dot: true },
             lib: { src: 'example/lib', dot: true },
-			bower: { src: 'bower_components', dot: true }
-		},
-		bower: { 
-			install: { options: { targetDir: 'example/lib' } } 
-		},
+            bower: { src: 'bower_components', dot: true }
+        },
         cssmin: {
             dist: {
                 expand: true,
@@ -36,25 +32,24 @@ module.exports = function (grunt) {
                 }
             }
         },
-		uglify: {
-			dist: {
-				files: {
-					'dist/autocomplete.min.js': 'src/autocomplete.js'
-				}
-			}
-		}
-	});
+        uglify: {
+            dist: {
+                files: {
+                    'dist/autocomplete.min.js': 'src/autocomplete.js'
+                }
+            }
+        }
+    });
 
-	grunt.registerTask('test', [
-		'karma'
-	]);
+    grunt.registerTask('test', [
+        'karma'
+    ]);
 
-	grunt.registerTask('build', [
-		'clean',
-		'bower',
+    grunt.registerTask('build', [
+        'clean',
         'cssmin',
-		'uglify'
-	]);
+        'uglify'
+    ]);
 
-	grunt.registerTask('default', ['build']);
+    grunt.registerTask('default', ['build']);
 };

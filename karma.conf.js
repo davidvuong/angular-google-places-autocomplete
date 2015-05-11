@@ -1,11 +1,10 @@
 /*
  * angular-google-places-autocomplete
  *
- * Copyright (c) 2014 "kuhnza" David Kuhn
+ * Copyright (c) 2015 David Vuong
  * Licensed under the MIT license.
- * https://github.com/kuhnza/angular-google-places-autocomplete/blob/master/LICENSE
+ * https://github.com/davidvuong/angular-google-places-autocomplete/blob/master/LICENSE
  */
- 
 'use strict';
 
 module.exports = function (config) {
@@ -17,11 +16,6 @@ module.exports = function (config) {
 		autoWatch: true,
 		reporters: ['progress', 'coverage'],
 		files: [
-			'bower_components/jquery/dist/jquery.js',
-			'bower_components/underscore/underscore.js',
-			'https://maps.googleapis.com/maps/api/js?libraries=places',
-			'bower_components/angular/angular.js',
-			'bower_components/angular-mocks/angular-mocks.js',
 			'src/**/*.js',
 			'test/**/*.js'
 		],

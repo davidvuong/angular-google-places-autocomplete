@@ -1,5 +1,6 @@
 .idea/
 bower_components/
-coverage/
 node_modules/
-example/lib
+coverage/
+
+.DS_Store

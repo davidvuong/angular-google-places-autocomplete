@@ -43,6 +43,18 @@ The directive also supports the following _optional_ attributes:
 * forceSelection &mdash; forces the user to select from the dropdown. Defaults to `false`.
 * options &mdash; See [google.maps.places.AutocompleteRequest object specification](https://developers.google.com/maps/documentation/javascript/reference#AutocompletionRequest).
 
+Developers
+----------
+
+```bash
+git clone git@github.com:davidvuong/angular-google-places-autocomplete.git
+cd angular-google-places-autocomplete
+sudo npm -g install grunt-cli
+npm install
+
+grunt
+```
+
 Examples
 --------
 
@@ -51,12 +63,7 @@ Examples
 * [Force selection](example/force-selection.html)
 * [Custom Places](example/custom-places.html)
 
-Issues or feature requests
---------------------------
-
-Create a ticket [here](https://github.com/kuhnza/angular-google-places-autocomplete/issues)
-
 Contributing
 ------------
 
-Issue a pull request including any relevent testing and updated any documentation if required.
+Issue a pull request including any relevant testing and updated any documentation if required.

@@ -4,6 +4,7 @@
  */
 
 .pac-container {
+    display: block;
     background-color: #fff;
     position: absolute !important;
     z-index: 1000;

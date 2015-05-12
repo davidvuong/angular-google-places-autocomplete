@@ -35,11 +35,7 @@
                     controller: ['$scope', function ($scope) {}],
                     link: function ($scope, element, attrs, controller) {
                         var keymap = {
-                            tab: 9,
-                            enter: 13,
-                            esc: 27,
-                            up: 38,
-                            down: 40
+                            tab: 9, enter: 13, esc: 27, up: 38, down: 40
                         };
                         var hotkeys = _.values(keymap);
                         var autocompleteService = new google.maps.places.AutocompleteService();
@@ -66,10 +62,7 @@
 
                         function initAutocompleteDrawer() {
                             // Drawer element used to display predictions
-                            var drawerElement = angular.element('<div g-places-autocomplete-drawer></div>'),
-                                body = angular.element($document[0].body),
-                                $drawer;
-
+                            var drawerElement = angular.element('<div g-places-autocomplete-drawer></div>');
                             drawerElement.attr({
                                 input: 'input',
                                 query: 'query',
@@ -78,8 +71,8 @@
                                 selected: 'selected'
                             });
 
-                            $drawer = $compile(drawerElement)($scope);
-                            body.append($drawer);  // Append to DOM
+                            var $drawer = $compile(drawerElement)($scope);
+                            element.after($drawer);
                         }
 
                         function initNgModelController() {
@@ -321,7 +314,7 @@
     app
         .directive('gPlacesAutocompleteDrawer', ['$window', '$document', function ($window, $document) {
             var TEMPLATE = [
-                '<div class="pac-container" ng-if="isOpen()" ng-style="{top: position.top+\'px\', left: position.left+\'px\', width: position.width+\'px\'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">',
+                '<div class="pac-container" ng-style="{ width: position.width+\'px\' }" ng-if="isOpen()" role="listbox" aria-hidden="{{ !isOpen() }}">',
                 '  <div class="pac-item" g-places-autocomplete-prediction index="$index" prediction="prediction" query="query"',
                 '       ng-repeat="prediction in predictions track by $index" ng-class="{\'pac-item-selected\': isActive($index) }"',
                 '       ng-mouseenter="selectActive($index)" ng-click="selectPrediction($index)" role="option" id="{{prediction.id}}">',
@@ -442,3 +435,4 @@
         }]);
 
 })(angular.module('google.places', []));
+

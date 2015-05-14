@@ -1,55 +1,172 @@
 /*
- * angular-google-places-autocomplete
+ * ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong
  * Licensed under the MIT license.
- * https://github.com/davidvuong/angular-google-places-autocomplete/blob/master/LICENSE
+ * https://github.com/davidvuong/ng-gplaces-autocomplete/blob/master/LICENSE
  */
-'use strict';
-
 module.exports = function (grunt) {
-    // Load grunt tasks automatically
-    require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-bump');
+    grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-karma');
 
-    grunt.initConfig({
+    var userConfig = require('./build.config.js');
+    var taskConfig = {
+        pkg: grunt.file.readJSON("package.json"),
+
+        meta: {
+            banner: '/**\n' +
+                ' * <%= pkg.name %> - v<%= pkg.version %>, <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>\n' +
+                ' * <%= pkg.homepage %>\n' +
+                ' *\n' +
+                ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+                ' * Licensed <%= pkg.licenses.type %> <<%= pkg.licenses.url %>>\n' +
+                ' */\n'
+        },
+
+        bump: {
+            options: {
+                files: [
+                    'package.json',
+                    'bower.json'
+                ],
+                commit: true,
+                commitMessage: 'chore(release): v%VERSION% release',
+                commitFiles: [
+                    'package.json',
+                    'bower.json'
+                ],
+                createTag: false,
+                push: false
+            }
+        },
+
+        clean: [
+            '<%= build_dir %>',
+            '<%= compile_dir %>'
+        ],
+
+        copy: {
+            build_appjs: {
+                files: [
+                    {
+                        src: [ '<%= app_files.js %>' ],
+                        dest: '<%= build_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            }
+        },
+
+        concat: {
+            build_css: {
+                src: [
+                    '<%= autoprefixer.build.files[0].dest %>'
+                ],
+                dest: '<%= autoprefixer.build.files[0].dest %>'
+            },
+            compile_js: {
+                options: {
+                    banner: '<%= meta.banner %>'
+                },
+                src: [ '<%= build_dir %>/src/*.js' ],
+                dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
+            }
+        },
+
+        ngAnnotate: {
+            compile: {
+                files: [
+                    {
+                        src: [ '<%= app_files.js %>' ],
+                        cwd: '<%= build_dir %>',
+                        dest: '<%= build_dir %>',
+                        expand: true
+                    }
+                ]
+            }
+        },
+
+        uglify: {
+            compile: {
+                options: {
+                    banner: '<%= meta.banner %>'
+                },
+                files: {
+                    '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.min.js': '<%= concat.compile_js.dest %>'
+                }
+            }
+        },
+
+        less: {
+            build: {
+                files: {
+                    '<%= build_dir %>/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
+                }
+            }
+        },
+
+        autoprefixer: {
+            options: ['last 2 version', 'ie 8', 'ie 9'],
+            build: {
+                files: [
+                    {
+                        expand: false,
+                        src: '<%= build_dir %>/<%= pkg.name %>-<%= pkg.version %>.css',
+                        dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.css'
+                    }
+                ]
+            }
+        },
+
+        jshint: {
+            src: [
+                '<%= app_files.js %>',
+                '<%= app_files.jshint_ignore %>'
+            ],
+            gruntfile: [
+                'Gruntfile.js'
+            ],
+            options: {
+                curly: true,
+                immed: true,
+                newcap: true,
+                noarg: true,
+                sub: true,
+                boss: true,
+                eqnull: true,
+                debug: true
+            }
+        },
+
         karma: {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
             }
-        },
-        clean: {
-            dist: { src: 'dist', dot: true },
-            lib: { src: 'example/lib', dot: true },
-            bower: { src: 'bower_components', dot: true }
-        },
-        cssmin: {
-            dist: {
-                expand: true,
-                cwd: 'dist/',
-                files: {
-                    'dist/autocomplete.min.css': 'src/autocomplete.css'
-                }
-            }
-        },
-        uglify: {
-            dist: {
-                files: {
-                    'dist/autocomplete.min.js': 'src/autocomplete.js'
-                }
-            }
         }
-    });
+    };
 
-    grunt.registerTask('test', [
-        'karma'
-    ]);
+    grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
+
+    grunt.registerTask('default', [ 'build', 'compile' ]);
 
     grunt.registerTask('build', [
-        'clean',
-        'cssmin',
-        'uglify'
+        'clean', 'jshint', 'less:build', 'autoprefixer:build',
+        'concat:build_css', 'copy:build_appjs'
     ]);
 
-    grunt.registerTask('default', ['build']);
+    grunt.registerTask('compile', [
+        'autoprefixer:build', 'ngAnnotate', 'concat:compile_js', 'uglify'
+    ]);
+
+    grunt.registerTask('test', [ 'karma' ]);
 };

@@ -1,12 +1,17 @@
 {
-  "name": "angular-google-places-autocomplete",
+  "name": "ng-gplaces-autocomplete",
   "version": "0.2.4",
+  "author": "David Vuong <david.vuong256@gmail.com>",
+  "homepage": "https://github.com/davidvuong/ng-gplaces-autocomplete",
+  "licenses": {
+    "type": "MIT",
+    "url": "https://raw.githubusercontent.com/davidvuong/ng-gplaces-autocomplete/master/LICENSE"
+  },
   "repository": {
     "type": "git",
-    "url": "http://github.com/davidvuong/angular-google-places-autocomplete.git"
+    "url": "http://github.com/davidvuong/ng-gplaces-autocomplete.git"
   },
   "dependencies": {
-    "grunt-contrib-cssmin": "^0.10.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -19,7 +24,14 @@
     "karma-jasmine": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.1",
     "grunt-contrib-clean": "^0.5.0",
-    "grunt-bower-task": "^0.3.4"
+    "grunt-bower-task": "^0.3.4",
+    "grunt-autoprefixer": "^3.0.0",
+    "grunt-bump": "^0.3.1",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-ng-annotate": "^0.10.0"
   },
   "engines": {
     "node": ">=0.10.0"

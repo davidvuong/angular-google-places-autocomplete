@@ -1,9 +1,9 @@
 /*
- * angular-google-places-autocomplete
+ * ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong
  * Licensed under the MIT license.
- * https://github.com/davidvuong/angular-google-places-autocomplete/blob/master/LICENSE
+ * https://github.com/davidvuong/ng-gplaces-autocomplete/blob/master/LICENSE
  */
 'use strict';
 
@@ -167,25 +167,23 @@ var PREDICTIONS = [
 ];
 
 
-describe('Factory: googlePlacesApi', function () {
-
+describe('Factory: googlePlacesAPI', function () {
     var googlePlacesApi;
 
     beforeEach(module('google.places'));
 
-    beforeEach(inject(function (_$window_, _googlePlacesApi_) {
-        googlePlacesApi = _googlePlacesApi_;
+    beforeEach(inject(function (_$window_, _googlePlacesAPI_) {
+        googlePlacesApi = _googlePlacesAPI_;
     }));
 
     it('should load', function () {
-        expect(googlePlacesApi).toBeDefined();
+        expect(googlePlacesAPI).toBeDefined();
     });
 });
 
 
 describe('Directive: gPlacesAutocomplete', function () {
-
-    var $parentScope, $isolatedScope, $compile, googlePlacesApi;
+    var $parentScope, $isolatedScope, $compile;
 
     function compileAndDigest(html) {
         var element = angular.element(html);
@@ -205,14 +203,13 @@ describe('Directive: gPlacesAutocomplete', function () {
         compileAndDigest('<input type="text" g-places-autocomplete ng-model="place" />');
     }));
 
-    // TODO: write more tests!
     it('should initialize model', function () {
+
     });
 });
 
 
 describe('Directive: gPlacesAutocompleteDrawer', function () {
-
     var $parentScope, $isolatedScope, $compile, element;
 
     var template = '<div g-places-autocomplete-drawer input="input" query="query" predictions="predictions" active="active" selected="selected"></div>';
@@ -235,9 +232,7 @@ describe('Directive: gPlacesAutocompleteDrawer', function () {
         $parentScope.predictions = [];
     }));
 
-
     describe('when there are no predictions', function () {
-
         beforeEach(function () {
             compileAndDigest(template);
         });
@@ -248,7 +243,6 @@ describe('Directive: gPlacesAutocompleteDrawer', function () {
     });
 
     describe('when there are predictions', function () {
-
         var predictionElements;
 
         beforeEach(function () {
@@ -287,7 +281,6 @@ describe('Directive: gPlacesAutocompleteDrawer', function () {
 
 
 describe('Directive: gPlacesAutocompletePrediction', function () {
-
     var $parentScope, $isolatedScope, $compile;
 
     function compileAndDigest(html) {
@@ -310,14 +303,13 @@ describe('Directive: gPlacesAutocompletePrediction', function () {
         compileAndDigest('<div g-places-autocomplete-prediction index="$index" prediction="prediction" query="query"></div>');
     }));
 
-    // TODO: write more tests!
     it('should initialize model', function () {
+
     });
 });
 
 
 describe('Filter: unmatchedTermsOnly', function () {
-
     var unmatchedTermsOnlyFilter;
 
     beforeEach(module('google.places'));
@@ -328,21 +320,20 @@ describe('Filter: unmatchedTermsOnly', function () {
 
     it('should only return unmatched terms for a prediction', function () {
         var prediction = angular.copy(PREDICTIONS[0]);
-
         var result = unmatchedTermsOnlyFilter(prediction.terms, prediction);
 
         expect(result).toEqual([
             {
-                "offset": 21,
-                "value": "Waterloo"
+                offset: 21,
+                value: "Waterloo"
             },
             {
-                "offset": 31,
-                "value": "New South Wales"
+                offset: 31,
+                value: "New South Wales"
             },
             {
-                "offset": 48,
-                "value": "Australia"
+                offset: 48,
+                value: "Australia"
             }
         ]);
     });
@@ -350,11 +341,9 @@ describe('Filter: unmatchedTermsOnly', function () {
 
 
 describe('Filter: trailingComma', function () {
-
-    var trailingCommaFilter;
-
     beforeEach(module('google.places'));
 
+    var trailingCommaFilter;
     beforeEach(inject(function (_trailingCommaFilter_) {
         trailingCommaFilter = _trailingCommaFilter_;
     }));

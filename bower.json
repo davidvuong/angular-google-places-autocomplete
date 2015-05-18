@@ -1,4 +1,11 @@
 {
   "name": "ng-gplaces-autocomplete",
-  "version": "0.2.5"
+  "version": "0.2.5",
+  "main": [
+    "./src/directives.js",
+    "./src/filters.js",
+    "./src/providers.js",
+    "./src/less/autocomplete.less"
+  ],
+  "ignore": []
 }

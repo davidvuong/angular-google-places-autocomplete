@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                 options: {
                     banner: '<%= meta.banner %>'
                 },
-                src: [ '<%= app_files.js %>' ],
+                src: [ '<%= build_dir %>/annotated/**/*.js' ],
                 dest: '<%= compile_dir %>/autocomplete.js'
             }
         },
@@ -87,8 +87,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: [ '<%= app_files.js %>' ],
-                        cwd: '<%= build_dir %>',
-                        dest: '<%= build_dir %>',
+                        dest: '<%= build_dir %>/annotated',
                         expand: true
                     }
                 ]
@@ -160,12 +159,12 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [ 'build', 'compile' ]);
 
     grunt.registerTask('build', [
-        'clean', 'jshint', 'less:build', 'autoprefixer:build',
+        'clean', 'jshint', 'less:build', 'autoprefixer:build', 'ngAnnotate',
         'concat:build_css', 'copy:build_appjs'
     ]);
 
     grunt.registerTask('compile', [
-        'autoprefixer:build', 'ngAnnotate', 'concat:compile_js', 'uglify'
+        'autoprefixer:build', 'concat:compile_js', 'uglify'
     ]);
 
     grunt.registerTask('test', [ 'karma' ]);

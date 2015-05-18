@@ -1,5 +1,5 @@
 /**
- * ng-gplaces-autocomplete - v0.2.6, 2015-05-18 10:59:17 AM
+ * ng-gplaces-autocomplete - v0.2.6, 2015-05-18 6:50:13 PM
  * https://github.com/davidvuong/ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong <david.vuong256@gmail.com>
@@ -23,6 +23,7 @@
         }
         return $window.google;
     }
+    google.$inject = ["$window"];
 
     app
         .factory('google', google);
@@ -309,6 +310,7 @@
             }
         };
     }
+    gPlacesAutocomplete.$inject = ["$compile", "google"];
 
     app
         .directive('gPlacesAutocomplete', gPlacesAutocomplete);
@@ -376,6 +378,7 @@
             }
         };
     }
+    gPlacesAutocompleteDrawer.$inject = ["$window", "$document"];
 
     app
         .directive('gPlacesAutocompleteDrawer', gPlacesAutocompleteDrawer);
@@ -427,6 +430,7 @@
             );
         };
     }
+    highlightMatched.$inject = ["$sce"];
 
     app
         .filter('highlightMatched', highlightMatched);

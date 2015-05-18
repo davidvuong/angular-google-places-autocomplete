@@ -11,7 +11,7 @@ module.exports = {
     src_dir: 'src',
 
     app_files: {
-        js: [ 'src/providers.js', 'src/directives.js', 'src/filters.js',
+        js: [ 'src/app.js', 'src/directives.js', 'src/filters.js',
               '!src/**/*.spec.js', '!src/assets/**/*.js' ],
         jshint_ignore: [],
         less: 'src/less/autocomplete.less'

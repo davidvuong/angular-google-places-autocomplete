@@ -1,5 +1,5 @@
 /**
- * ng-gplaces-autocomplete - v0.2.5, 2015-05-18 10:50:01 AM
+ * ng-gplaces-autocomplete - v0.2.5, 2015-05-18 10:56:44 AM
  * https://github.com/davidvuong/ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong <david.vuong256@gmail.com>
@@ -17,7 +17,7 @@
     ]);
 
     /** @ngInject */
-    function googlePlacesAPI($window) {
+    function google($window) {
         if (!$window.google) {
             throw 'Global `google` var missing. Did you forget to include the places API script?';
         }
@@ -25,7 +25,7 @@
     }
 
     app
-        .factory('googlePlacesAPI', googlePlacesAPI);
+        .factory('google', google);
 
 })();
 
@@ -310,7 +310,6 @@
         };
     }
 
-    /* Basic usage: <input type="text" g-places-autocomplete ng-model="myScopeVar" /> */
     app
         .directive('gPlacesAutocomplete', gPlacesAutocomplete);
 

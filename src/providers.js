@@ -10,7 +10,7 @@
     ]);
 
     /** @ngInject */
-    function googlePlacesAPI($window) {
+    function google($window) {
         if (!$window.google) {
             throw 'Global `google` var missing. Did you forget to include the places API script?';
         }
@@ -18,6 +18,6 @@
     }
 
     app
-        .factory('googlePlacesAPI', googlePlacesAPI);
+        .factory('google', google);
 
 })();

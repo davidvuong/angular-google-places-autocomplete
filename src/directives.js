@@ -279,7 +279,6 @@
         };
     }
 
-    /* Basic usage: <input type="text" g-places-autocomplete ng-model="myScopeVar" /> */
     app
         .directive('gPlacesAutocomplete', gPlacesAutocomplete);
 

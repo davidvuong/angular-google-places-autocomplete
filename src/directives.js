@@ -94,12 +94,10 @@
                 function onBlur(event) {
                     if ($scope.predictions.length === 0) {
                         if ($scope.forceSelection) {
-                            var phase = $scope.$root.$$phase;
-                            var fn = function() {
-                                $scope.model = '';
-                            };
+                            var fn = function () { $scope.model = ''; };
 
-                            if(phase == '$apply' || phase == '$digest') {
+                            var phase = $scope.$root.$$phase;
+                            if (phase == '$apply' || phase == '$digest') {
                                 fn();
                             } else {
                                 $scope.$apply(fn);
@@ -145,7 +143,7 @@
                 function parse(viewValue) {
                     var request;
 
-                    if (!(viewValue && isString(viewValue))) { return viewValue; }
+                    if (!(viewValue && _.isString(viewValue))) { return viewValue; }
 
                     $scope.query = viewValue;
                     request = angular.extend({ input: viewValue }, $scope.options);
@@ -175,9 +173,9 @@
                 function format(modelValue) {
                     var viewValue = "";
 
-                    if (isString(modelValue)) {
+                    if (_.isString(modelValue)) {
                         viewValue = modelValue;
-                    } else if (isObject(modelValue)) {
+                    } else if (_.isObject(modelValue)) {
                         viewValue = modelValue.formatted_address;
                     }
 
@@ -257,14 +255,6 @@
                         matched_substrings: matched_substrings,
                         terms: terms
                     };
-                }
-
-                function isString(val) {
-                    return Object.prototype.toString.call(val) == '[object String]';
-                }
-
-                function isObject(val) {
-                    return Object.prototype.toString.call(val) == '[object Object]';
                 }
 
                 function indexOf(array, item) {
@@ -385,4 +375,4 @@
     app
         .directive('gPlacesAutocompletePrediction', gPlacesAutocompletePrediction);
 
-})(angular.module('google.places.directives', []));
+})(angular.module('google.places.directives'));

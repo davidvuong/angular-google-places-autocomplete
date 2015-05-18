@@ -51,4 +51,4 @@
     app
         .filter('trailingComma', trailingComma);
 
-})(angular.module('google.places.filters', []));
+})(angular.module('google.places.filters'));

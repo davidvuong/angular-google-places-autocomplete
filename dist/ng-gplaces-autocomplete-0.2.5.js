@@ -1,10 +1,34 @@
 /**
- * ng-gplaces-autocomplete - v0.2.4, 2015-05-14 2:56:35 PM
+ * ng-gplaces-autocomplete - v0.2.5, 2015-05-18 10:35:01 AM
  * https://github.com/davidvuong/ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong <david.vuong256@gmail.com>
  * Licensed MIT <https://raw.githubusercontent.com/davidvuong/ng-gplaces-autocomplete/master/LICENSE>
  */
+(function () {
+    'use strict';
+
+    angular.module('google.places.directives', []);
+    angular.module('google.places.filters', []);
+
+    var app = angular.module('google.places', [
+        'google.places.directives',
+        'google.places.filters'
+    ]);
+
+    /** @ngInject */
+    function googlePlacesAPI($window) {
+        if (!$window.google) {
+            throw 'Global `google` var missing. Did you forget to include the places API script?';
+        }
+        return $window.google;
+    }
+
+    app
+        .factory('googlePlacesAPI', googlePlacesAPI);
+
+})();
+
 (function (app) {
     'use strict';
 
@@ -101,12 +125,10 @@
                 function onBlur(event) {
                     if ($scope.predictions.length === 0) {
                         if ($scope.forceSelection) {
-                            var phase = $scope.$root.$$phase;
-                            var fn = function() {
-                                $scope.model = '';
-                            };
+                            var fn = function () { $scope.model = ''; };
 
-                            if(phase == '$apply' || phase == '$digest') {
+                            var phase = $scope.$root.$$phase;
+                            if (phase == '$apply' || phase == '$digest') {
                                 fn();
                             } else {
                                 $scope.$apply(fn);
@@ -152,7 +174,7 @@
                 function parse(viewValue) {
                     var request;
 
-                    if (!(viewValue && isString(viewValue))) { return viewValue; }
+                    if (!(viewValue && _.isString(viewValue))) { return viewValue; }
 
                     $scope.query = viewValue;
                     request = angular.extend({ input: viewValue }, $scope.options);
@@ -182,9 +204,9 @@
                 function format(modelValue) {
                     var viewValue = "";
 
-                    if (isString(modelValue)) {
+                    if (_.isString(modelValue)) {
                         viewValue = modelValue;
-                    } else if (isObject(modelValue)) {
+                    } else if (_.isObject(modelValue)) {
                         viewValue = modelValue.formatted_address;
                     }
 
@@ -266,14 +288,6 @@
                     };
                 }
 
-                function isString(val) {
-                    return Object.prototype.toString.call(val) == '[object String]';
-                }
-
-                function isObject(val) {
-                    return Object.prototype.toString.call(val) == '[object Object]';
-                }
-
                 function indexOf(array, item) {
                     var i, length;
                     if (array == null) { return -1; }
@@ -295,7 +309,6 @@
             }
         };
     }
-    gPlacesAutocomplete.$inject = ["$compile", "google"];
 
     /* Basic usage: <input type="text" g-places-autocomplete ng-model="myScopeVar" /> */
     app
@@ -364,7 +377,6 @@
             }
         };
     }
-    gPlacesAutocompleteDrawer.$inject = ["$window", "$document"];
 
     app
         .directive('gPlacesAutocompleteDrawer', gPlacesAutocompleteDrawer);
@@ -394,7 +406,7 @@
     app
         .directive('gPlacesAutocompletePrediction', gPlacesAutocompletePrediction);
 
-})(angular.module('google.places.directives', []));
+})(angular.module('google.places.directives'));
 
 (function (app) {
     'use strict';
@@ -416,7 +428,6 @@
             );
         };
     }
-    highlightMatched.$inject = ["$sce"];
 
     app
         .filter('highlightMatched', highlightMatched);
@@ -450,21 +461,4 @@
     app
         .filter('trailingComma', trailingComma);
 
-})(angular.module('google.places.filters', []));
-
-(function (app) {
-    'use strict';
-
-    /** @ngInject */
-    function googlePlacesAPI($window) {
-        if (!$window.google) {
-            throw 'Global `google` var missing. Did you forget to include the places API script?';
-        }
-        return $window.google;
-    }
-    googlePlacesAPI.$inject = ["$window"];
-
-    app
-        .factory('googlePlacesAPI', googlePlacesAPI);
-
-})(angular.module('google.places.providers', []));
+})(angular.module('google.places.filters'));

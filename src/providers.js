@@ -1,5 +1,13 @@
-(function (app) {
+(function () {
     'use strict';
+
+    angular.module('google.places.directives', []);
+    angular.module('google.places.filters', []);
+
+    var app = angular.module('google.places', [
+        'google.places.directives',
+        'google.places.filters'
+    ]);
 
     /** @ngInject */
     function googlePlacesAPI($window) {
@@ -12,4 +20,4 @@
     app
         .factory('googlePlacesAPI', googlePlacesAPI);
 
-})(angular.module('google.places.providers', []));
+})();

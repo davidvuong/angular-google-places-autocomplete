@@ -78,7 +78,7 @@ module.exports = function (grunt) {
                     banner: '<%= meta.banner %>'
                 },
                 src: [ '<%= app_files.js %>' ],
-                dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
+                dest: '<%= compile_dir %>/autocomplete.js'
             }
         },
 
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
                     banner: '<%= meta.banner %>'
                 },
                 files: {
-                    '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.min.js': '<%= concat.compile_js.dest %>'
+                    '<%= compile_dir %>/autocomplete.min.js': '<%= concat.compile_js.dest %>'
                 }
             }
         },
@@ -121,7 +121,7 @@ module.exports = function (grunt) {
                     {
                         expand: false,
                         src: '<%= build_dir %>/<%= pkg.name %>-<%= pkg.version %>.css',
-                        dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.css'
+                        dest: '<%= compile_dir %>/autocomplete.css'
                     }
                 ]
             }

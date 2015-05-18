@@ -16,13 +16,13 @@ Add the script into your asset pipeline (or in a script tag). Make sure that the
 
 ```html
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-<script src="/bower_components/ng-gplaces-autocomplete/dist/ng-gplaces-autocomplete-{version}.js"></script>
+<script src="/bower_components/ng-gplaces-autocomplete/dist/autocomplete.js"></script>
 ```
 
 You'll probably also want the styles:
 
 ```html
-<link rel="stylesheet" href="/bower_components/ng-gplaces-autocomplete/dist/ng-gplaces-autocomplete-{version}.css">
+<link rel="stylesheet" href="/bower_components/ng-gplaces-autocomplete/dist/autocomplete.css">
 ```
 
 Usage

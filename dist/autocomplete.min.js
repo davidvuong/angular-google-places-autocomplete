@@ -1,5 +1,5 @@
 /**
- * ng-gplaces-autocomplete - v0.2.6, 2015-05-18 6:50:13 PM
+ * ng-gplaces-autocomplete - v0.2.7, 2015-05-18 6:51:09 PM
  * https://github.com/davidvuong/ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong <david.vuong256@gmail.com>

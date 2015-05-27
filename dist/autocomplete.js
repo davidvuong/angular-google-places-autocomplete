@@ -1,5 +1,5 @@
 /**
- * ng-gplaces-autocomplete - v0.2.7, 2015-05-18 6:51:09 PM
+ * ng-gplaces-autocomplete - v0.2.7, 2015-05-27 2:41:29 PM
  * https://github.com/davidvuong/ng-gplaces-autocomplete
  *
  * Copyright (c) 2015 David Vuong <david.vuong256@gmail.com>
@@ -322,7 +322,7 @@
                   'ng-if="isOpen()" role="listbox" aria-hidden="{{ !isOpen() }}">',
                 '<div class="pac-item" g-places-autocomplete-prediction index="$index"',
                       'prediction="prediction" query="query" ng-repeat="prediction in predictions track by $index"',
-                      'ng-class="{\'pac-item-selected\': isActive($index) }"',
+                      'ng-class="{\'pac-item-selected\': isActive($index) }" ng-blur="selectPrediction($index)"',
                       'ng-mouseenter="selectActive($index)" ng-click="selectPrediction($index)"',
                       'role="option" id="{{prediction.id}}">',
                 '</div>',
@@ -398,7 +398,7 @@
 
         return {
             restrict: 'A',
-            scope:{
+            scope: {
                 index:'=', prediction:'=', query:'='
             },
             template: TEMPLATE.join('')

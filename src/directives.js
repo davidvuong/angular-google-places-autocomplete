@@ -289,7 +289,7 @@
                   'ng-if="isOpen()" role="listbox" aria-hidden="{{ !isOpen() }}">',
                 '<div class="pac-item" g-places-autocomplete-prediction index="$index"',
                       'prediction="prediction" query="query" ng-repeat="prediction in predictions track by $index"',
-                      'ng-class="{\'pac-item-selected\': isActive($index) }"',
+                      'ng-class="{\'pac-item-selected\': isActive($index) }" ng-blur="selectPrediction($index)"',
                       'ng-mouseenter="selectActive($index)" ng-click="selectPrediction($index)"',
                       'role="option" id="{{prediction.id}}">',
                 '</div>',
@@ -364,7 +364,7 @@
 
         return {
             restrict: 'A',
-            scope:{
+            scope: {
                 index:'=', prediction:'=', query:'='
             },
             template: TEMPLATE.join('')

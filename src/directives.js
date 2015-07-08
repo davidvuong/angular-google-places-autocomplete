@@ -2,7 +2,7 @@
     'use strict';
 
     /** @ngInject */
-    function gPlacesAutocomplete($compile, google) {
+    function gPlacesAutocomplete($compile, $timeout, google) {
         return {
             restrict: 'A',
             require: '^ngModel',
@@ -91,7 +91,7 @@
                     }
                 }
 
-                function onBlur(event) {
+                function onBlur() {
                     if ($scope.predictions.length === 0) {
                         if ($scope.forceSelection) {
                             var fn = function () { $scope.model = ''; };
@@ -113,7 +113,10 @@
                     $scope.$digest();
                     $scope.$apply(function () {
                         if ($scope.selected === -1) {
-                            clearPredictions();
+                            // Delay the blur as it clears the prediction list before ng-click can select one.
+                            $timeout(function () {
+                                clearPredictions();
+                            }, 200);
                         }
                     });
                 }
